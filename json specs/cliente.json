@@ -1,0 +1,43 @@
+[
+    {
+        "id": "id",
+        "nome": "nome cliente",
+        "cnpj": "cnpj",
+        "cpf": "cpf",
+        "enderecos": [
+            {
+                "id": "id",
+                "tipo": "tipo", 
+                "logradouro": "logradouro",
+                "numero": "numero",
+                "complemento": "complemento",
+                "cep": "cep",
+                "cidade": "cidade",
+                "estado": "estado"
+            }
+        ],  
+        "emails": [
+            {
+                "id": "id",
+                "tipo": "tipo",
+                "email": "email"
+            }
+        ],
+        "telefones": [
+            {
+                "id": "id",
+                "tipo": "tipo",
+                "telefone": "telefone"
+            }
+        ],
+        "observacao": "observacao",
+        "processos": [
+            {
+                "id": "id",
+                "numero": "numero",
+                "observacao": "observacao"
+            }
+        ]
+
+    }
+]
