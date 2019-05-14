@@ -35,7 +35,29 @@
             {
                 "id": "id",
                 "numero": "numero",
-                "observacao": "observacao"
+                "observacao": "observacao",
+                "honorarios": [
+                    {
+                        "id": "id",
+                        "forma_pagamento": "forma pagamento",
+                        "valor": "valor",
+                        "data_vencimento": "data_vencimento",
+                        "situacao": "situacao",
+                        "historico": "historico"
+                    }
+                ],
+                "custas": [
+                    {
+                        "id": "id",
+                        "tipo_custa": "tipo_custa",
+                        "valor": "valor",
+                        "data_vencimento": "data_vencimento",
+                        "forma_pagamento": "forma pagamento",
+                        "situacao": "situacao",
+                        "historico": "historico"
+                    }
+                ]
+
             }
         ]
 

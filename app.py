@@ -3,8 +3,6 @@ from flask_restful import Api
 from flask_jwt_extended import JWTManager
 
 from resources.user import UserRegister, User, UserLogin, UserLogout, TokenRefresh
-from resources.item import Item, ItemList
-from resources.store import Store, StoreList
 
 from resources.cliente import (
     Cliente,
@@ -18,6 +16,9 @@ from resources.cliente import (
 )
 
 from resources.processo import Processo, ProcessoLista
+from resources.honorario import Honorario, HonorarioLista
+from resources.custa import Custa, CustaLista
+
 
 from blacklist import BLACKLIST
 
@@ -30,12 +31,7 @@ app.config['JWT_BLACKLIST_TOKEN_CHECKS'] = ['access', 'refresh']
 app.secret_key = 'jose'
 api = Api(app)
 
-
-@app.before_first_request
-def create_tables():
-    db.create_all()
-
-
+    
 jwt = JWTManager(app)
 
 @jwt.user_claims_loader
@@ -83,15 +79,12 @@ def revoked_token_callback():
         'error': 'token_revoked'
     }), 401
 
-api.add_resource(Store, '/store/<string:name>')
-api.add_resource(StoreList, '/stores')
-api.add_resource(Item, '/item/<string:name>')
-api.add_resource(ItemList, '/items')
 api.add_resource(UserRegister, '/register')
 api.add_resource(User, '/user/<int:user_id>')
 api.add_resource(UserLogin, '/login')
 api.add_resource(UserLogout, '/logout')
 api.add_resource(TokenRefresh, '/refresh')
+
 api.add_resource(ClienteLista, '/clientes')
 api.add_resource(Cliente, '/cliente/<int:cliente_id>')
 api.add_resource(ClienteEndereco, '/cliente/<int:cliente_id>/enderecos/<int:endereco_id>')
@@ -100,9 +93,15 @@ api.add_resource(ClienteTelefone, '/cliente/<int:cliente_id>/telefones/<int:tele
 api.add_resource(ClienteTelefoneLista, '/cliente/<int:cliente_id>/telefones/')
 api.add_resource(ClienteEmail, '/cliente/<int:cliente_id>/emails/<int:email_id>')
 api.add_resource(ClienteEmailLista, '/cliente/<int:cliente_id>/emails/')
+
 api.add_resource(Processo, '/cliente/<int:cliente_id>/processos/<int:processo_id>')
 api.add_resource(ProcessoLista, '/cliente/<int:cliente_id>/processos/')
 
+api.add_resource(HonorarioProcesso, '/cliente/<int:cliente_id>/processos/<int:processo_id>/honorarios<int:honorario_id>')
+api.add_resource(HonorarioProcessoLista, '/cliente/<int:cliente_id>/processos/honorarios/')
+
+api.add_resource(CustaProcesso, '/cliente/<int:cliente_id>/processos/<int:processo_id>/custas<int:custa_id>')
+api.add_resource(CustaProcessoLista, '/cliente/<int:cliente_id>/processos/custas/')
 
 if __name__ == '__main__':
     from db import db
